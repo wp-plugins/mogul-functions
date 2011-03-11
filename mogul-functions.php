@@ -3,10 +3,10 @@
 Plugin Name: Mogul Custom Functions
 Plugin URI: http://www.mogul.co.nz
 Description: A set of Custom Functions for Mogul sites
-Version: 1.1
+Version: 1.1.1
 Author: Bren Faulknor-Murrell @ Mogul
 Author URI: http://www.mogul.co.nz
-License: GPL
+License: GPLv3
 */
 
 
@@ -144,6 +144,67 @@ function mog_simple_sidebar($postID = NULL){
     echo "<h3 class='widgettitle'>".$simpleTitle."</h3><ul class='simpleSidebar'>".$simpleSidebar."</ul>";
     
 }
+add_action( 'widgets_init', 'mog_ss_widget' );function mog_ss_widget() {
+	register_widget( 'Mogul_SimpleSidebar_Widget' );
+}
+class Mogul_SimpleSidebar_Widget extends WP_Widget {
+	function Mogul_SimpleSidebar_Widget() {
+		// widget actual processes
+		$widget_ops = array( 'classname' => 'simple-sidebar', 'description' => __('A simple widget that displays a list of descendent pages for the current pages\' ultimate parent.', 'simple-sidebar') );
 
+		/* Widget control settings. */
+		$control_ops = array( 'id_base' => 'simple-sidebar-widget' );
 
+		/* Create the widget. */
+		$this->WP_Widget( 'simple-sidebar-widget', __('Simple Sidebar Widget', 'simple-sidebar'), $widget_ops, $control_ops );
+	}
+
+	function form($instance) {
+		// outputs the options form on admin ?>
+		<p>This widget has no settings... yet</p>	
+		<?php
+		
+		
+	}
+
+	function update($new_instance, $old_instance) {
+		// processes widget options to be saved
+	}
+
+	function widget($args, $instance) {
+		// outputs the content of the widget
+		extract( $args );
+		//find ultimate parent page (top level)
+		$postID = mog_get_outside_id();
+		$currentPostID = $postID;
+		$currentPost = get_post($currentPostID);
+		$currentPostType = $currentPost->post_type;
+		if($currentPostType == 'page') {
+		//do until the currentPage has no parent
+		    while (!$ultimateParent) {
+			//get post using $currentPostID
+			$currentPost = get_post($currentPostID);
+			//store parent of current post
+			$currentParent = $currentPost->post_parent;
+			if ($currentParent == 0) {
+			    //if this post has no parent, set the top level parent
+			    $ultimateParent = $currentPostID;
+			} else {
+			    //otherwise set currentpostid to current parent (move up a level) and try again
+			    $currentPostID = $currentParent;
+			}
+		    }
+		}
+		////only show this if the current post is a page
+		if($ultimateParent) {
+		    $simpleTitle = get_the_title($ultimateParent);
+		    $simpleSidebar = wp_list_pages('child_of='.$ultimateParent.'&title_li=&echo=0');
+		    echo $before_widget;
+		    echo $before_title . $simpleTitle . $after_title;
+		    echo "<ul>".$simpleSidebar."</ul>";
+		    echo $after_widget;
+		}
+	}
+
+}
 ?>
