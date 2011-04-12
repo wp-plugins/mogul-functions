@@ -64,6 +64,34 @@ function mog_in_hierarchy($current_page,$comparison) {
 	}
 }
 
+/* this function is for backwards compatability - spelling error in function name, Use mog_in_hierarchy instead */
+function mog_in_heirarchy($current_page,$comparison) {
+	$currentID = $current_page;
+	//set initial $currentParent variable (else while loop won't work)
+	$currentPost = get_post($currentID);
+	$currentParent = $currentPost->post_parent;
+	
+	if($currentID == $comparison) {
+		//current page is the comparison so return true
+		return true;
+	} else {
+		//otherwise, traverse up to top level page to find if any ancestor pages match $comparison
+		while ($currentParent != 0) {
+			//get post data using $currentPostID
+			$currentPost = get_post($currentID);
+			
+			//store parent of current post
+			$currentParent = $currentPost->post_parent;
+			if ($currentParent == $comparison) {
+				return true;
+			}
+			$currentID = $currentParent;
+		}
+	}
+}
+
+
+
 /*
 * Retrieves ID of current page - used in sidebars or outside of loop
 */
