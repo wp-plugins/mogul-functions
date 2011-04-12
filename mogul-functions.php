@@ -3,7 +3,7 @@
 Plugin Name: Mogul Custom Functions
 Plugin URI: http://www.mogul.co.nz
 Description: A set of Custom Functions for Mogul sites
-Version: 1.1.1
+Version: 1.1.3
 Author: Bren Faulknor-Murrell @ Mogul
 Author URI: http://www.mogul.co.nz
 License: GPLv3
