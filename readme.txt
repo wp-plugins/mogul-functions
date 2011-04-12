@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: BrenFM, MogulNZ
 Donate link: http://plugins.mogul.co.nz/about/mogul-functions/
-Tags: themes, function
+Tags: themes, functions, sidebar, parent
 Requires at least: 3.0.1
 Tested up to: 3.1.0
 Stable tag: 1.1.1
