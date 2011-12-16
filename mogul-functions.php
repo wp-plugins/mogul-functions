@@ -3,7 +3,7 @@
 Plugin Name: Mogul Custom Functions
 Plugin URI: http://www.mogul.co.nz
 Description: A set of Custom Functions for Mogul sites
-Version: 1.1.3
+Version: 1.1.4
 Author: Bren Faulknor-Murrell @ Mogul
 Author URI: http://www.mogul.co.nz
 License: GPLv3
@@ -111,6 +111,7 @@ function mog_long_excerpt($le_len = 276, $strip_html = true) {
     the_content();
     $content = ob_get_clean();
     $longexcerpt = $content ;
+    $longexcerpt = preg_replace( '|\[(.+?)\](.+?\[/\\1\])?|s', '', $longexcerpt);
     $longexcerpt = preg_replace('%<p\s+class="wp-caption-text">.*?</p>%s', '', $longexcerpt);
     if ($strip_html) {
         // remove <p></p> tags

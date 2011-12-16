@@ -4,7 +4,7 @@ Donate link: http://plugins.mogul.co.nz/about/mogul-functions/
 Tags: themes, functions, sidebar, parent
 Requires at least: 3.0.1
 Tested up to: 3.1.1
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 
 This plugin is intended for use by theme developers to hasten coding and to save the world from tyranny. But mostly the theme dev bit.
 
@@ -60,6 +60,9 @@ Please give generously.
 As this is for functions in a theme, there are no screenshots
 
 == Changelog ==
+= 1.1.4 =
+* Added to mog_long_excerpt() to strip out shortcode tags
+
 = 1.1.3 =
 * Meta update only - no significant change to functions.
 
