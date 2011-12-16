@@ -3,7 +3,7 @@ Contributors: BrenFM, MogulNZ
 Donate link: http://plugins.mogul.co.nz/about/mogul-functions/
 Tags: themes, functions, sidebar, parent
 Requires at least: 3.0.1
-Tested up to: 3.1.1
+Tested up to: 3.3.0
 Stable tag: 1.1.4
 
 This plugin is intended for use by theme developers to hasten coding and to save the world from tyranny. But mostly the theme dev bit.
